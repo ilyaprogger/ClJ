@@ -1,10 +1,12 @@
+
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.List;
 
 import static java.lang.Long.max;
 
 public class Infinite {
-    private ArrayList<Long> number = new ArrayList<>();
+
+    private List<Long> number = new ArrayList<>();
     private String result;
     private final static long BASE = 1000000000L;
 
@@ -17,7 +19,7 @@ public class Infinite {
                 } else
                     this.number.add(Long.parseLong(number.substring(i - 9, i)));
             }
-        } else throw new NumberFormatException("не число");
+        } else throw new NumberFormatException("Not number");
     }
 
     void formRes(ArrayList<Long> a, StringBuilder b) {
@@ -29,11 +31,17 @@ public class Infinite {
         }
     }
 
+    void notNull(List<Long> a, List<Long> b) {
+        if (a == null || b == null)
+            throw new NullPointerException();
+    }
+
     public Infinite add(Infinite other) {
+        notNull(this.number, other.number);
         int counter = 0;
         StringBuilder result = new StringBuilder();
-        ArrayList<Long> n1 = this.number;
-        ArrayList<Long> n2 = other.number;
+        List<Long> n1 = this.number;
+        List<Long> n2 = other.number;
         ArrayList<Long> res = new ArrayList<>();
         for (int i = 0; i < max(n1.size(), n2.size()) || counter == 1; i++) {
             res.add(0L);
@@ -51,8 +59,8 @@ public class Infinite {
     public Infinite sub(Infinite other) {
         int counter = 0;
         StringBuilder result = new StringBuilder();
-        ArrayList<Long> n1 = this.number;
-        ArrayList<Long> n2 = other.number;
+        List<Long> n1 = this.number;
+        List<Long> n2 = other.number;
         ArrayList<Long> res = new ArrayList<>();
         if (n1.size() < n2.size() || n1.get(n1.size() - 1) < n2.get(n2.size() - 1)) {
             n1 = other.number;
@@ -75,15 +83,15 @@ public class Infinite {
     public Infinite mul(Infinite other) {
         long counter = 0;
         StringBuilder result = new StringBuilder();
-        ArrayList<Long> n1 = this.number;
-        ArrayList<Long> n2 = other.number;
+        List<Long> n1 = this.number;
+        List<Long> n2 = other.number;
         ArrayList<Long> res = new ArrayList<>();
         for (int i = 0; i < n1.size(); ++i)
             for (int j = 0; j < n2.size() || counter != 0; ++j) {
                 res.add(0L);
                 long count = res.get(i + j) + n1.get(i) * (j < n2.size() ? n2.get(j) : 0) + counter;
-                res.set(i + j,  count % BASE);
-                counter =  count / BASE;
+                res.set(i + j, count % BASE);
+                counter = count / BASE;
             }
         formRes(res, result);
         return new Infinite(result.toString());
@@ -92,8 +100,8 @@ public class Infinite {
     public Infinite div(Infinite other) {
         long counter = 0L;
         StringBuilder result = new StringBuilder();
-        ArrayList<Long> n1 = this.number;
-        ArrayList<Long> n2 = other.number;
+        List<Long> n1 = this.number;
+        List<Long> n2 = other.number;
         ArrayList<Long> res = new ArrayList<>();
         for (int i = 0; i < n2.size() + n1.size(); i++) {
             res.add(0L);
@@ -119,10 +127,4 @@ public class Infinite {
         }
         return false;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number, result);
-    }
 }
-
