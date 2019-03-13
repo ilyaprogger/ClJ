@@ -82,8 +82,8 @@ public class Infinite {
             for (int j = 0; j < n2.size() || counter != 0; ++j) {
                 res.add(0L);
                 long count = res.get(i + j) + n1.get(i) * (j < n2.size() ? n2.get(j) : 0) + counter;
-                res.set(i + j, count % BASE);
-                counter = count / BASE;
+                res.set(i + j,  count % BASE);
+                counter =  count / BASE;
             }
         formRes(res, result);
         return new Infinite(result.toString());
