@@ -16,6 +16,19 @@ class InfiniteTest {
     }
 
     @Test
+    void rem() {
+        Infinite a = new Infinite("999999999999999");
+        Infinite b = new Infinite("1");
+        Assertions.assertEquals(a.sub(a.div(b).mul(b)).toString(), "0");
+        Infinite c = new Infinite("123");
+        Infinite d = new Infinite("2");
+        Assertions.assertEquals(c.sub(c.div(d).mul(d)).toString(), "1");
+        Infinite e = new Infinite("16");
+        Infinite f = new Infinite("7");
+        Assertions.assertEquals(e.sub(e.div(f).mul(f)).toString(), "2");
+    }
+
+    @Test
     void sub() {
         Infinite a = new Infinite("1000000000000000");
         Infinite b = new Infinite("999999999999999");
@@ -56,8 +69,6 @@ class InfiniteTest {
         Infinite f = new Infinite("15");
         Assertions.assertEquals(e.div(f).toString(), "1");
     }
-
-
 
     @Test
     void equals() {

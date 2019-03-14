@@ -1,4 +1,5 @@
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +32,7 @@ public class Infinite {
         }
     }
 
-    void notNull(List<Long> a, List<Long> b) {
-        if (a == null || b == null)
-            throw new NullPointerException();
-    }
-
     public Infinite add(Infinite other) {
-        notNull(this.number, other.number);
         int counter = 0;
         StringBuilder result = new StringBuilder();
         List<Long> n1 = this.number;
