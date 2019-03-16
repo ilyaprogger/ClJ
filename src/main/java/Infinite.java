@@ -1,3 +1,4 @@
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ public class Infinite {
     private String result;
     private final static int BASE = 1000000000;
 
-    public Infinite(String number) {
+    public Infinite(@NotNull String number) {
         if (number.chars().allMatch(Character::isDigit)) {
             result = number;
             for (int i = number.length(); i > 0; i -= 9) {
@@ -30,7 +31,7 @@ public class Infinite {
             b.append(String.format("%09d", a.get(i)));
         }
     }
-    public Infinite add(Infinite other) {
+    public Infinite add(@NotNull Infinite other) {
         int counter = 0;
         StringBuilder result = new StringBuilder();
         List<Integer> n1 = this.number;
@@ -49,7 +50,7 @@ public class Infinite {
         return new Infinite(result.toString());
     }
 
-    public Infinite sub(Infinite other) {
+    public Infinite sub(@NotNull Infinite other) {
         int counter = 0;
         StringBuilder result = new StringBuilder();
         List<Integer> n1 = this.number;
@@ -61,7 +62,7 @@ public class Infinite {
         }
         for (int i = 0; i < n2.size() || counter == 1; ++i) {
             res.add(0);
-            res.set(i,  n1.get(i) - counter - (i < n2.size() ? n2.get(i) : 0)); //helper function
+            res.set(i,  n1.get(i) - counter - (i < n2.size() ? n2.get(i) : 0));
             if (res.get(i) < 0)
                 counter = 1;
             else if (res.get(i) >= 0)
@@ -80,7 +81,7 @@ public class Infinite {
             b.append(String.format("%09d", a.get(i)));
         }
     }
-    public Infinite mul(Infinite other) {
+    public Infinite mul(@NotNull Infinite other) {
         long counter = 0;
         StringBuilder result = new StringBuilder();
         List<Integer> n1 = this.number;
@@ -89,7 +90,8 @@ public class Infinite {
         for (int i = 0; i < n1.size(); ++i)
             for (int j = 0; j < n2.size() || counter != 0; ++j) {
                 res.add(0L);
-                long count = res.get(i + j) + n1.get(i).longValue() * (j < n2.size() ? n2.get(j).longValue() : 0) + counter;
+                long count = res.get(i + j) + n1.get(i).longValue() * (j < n2.size() ? n2.get(j).longValue() : 0)
+                        + counter;
                 res.set(i + j, count % BASE);
                 counter = count / BASE;
             }
@@ -97,7 +99,7 @@ public class Infinite {
         return new Infinite(result.toString());
     }
 
-    public Infinite div(Infinite other) {
+    public Infinite div(@NotNull Infinite other) {
         long counter = 0L;
         StringBuilder result = new StringBuilder();
         List<Integer> n1 = this.number;
